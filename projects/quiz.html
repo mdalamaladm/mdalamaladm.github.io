@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz</title>
+
+  <style>
+    html {
+      margin-top: 4rem;
+      margin-bottom: 5.5rem;
+      background-color: #A6B28B;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 3rem;
+      color: #1C352D;
+    }
+
+    .quiz {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .question {
+      width: 100%;
+      max-width: 20rem;
+      padding: 0.8rem 1rem 1.2rem 1rem;
+      margin-bottom: 1rem;
+      color: #1C352D;
+      border: solid 0.1rem white;
+      border-radius: 0.3rem;
+    }
+
+    .question > p {
+      font-weight: 600;
+    }
+
+    .submit {
+      display: flex;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+
+    .submit button {
+      padding: 0.8rem 1rem;
+      background-color: #1C352D;
+      color: #A6B28B;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .submit button:hover,
+    .submit button:active {
+      background-color: #16231f;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="title">"About Me" Quiz</h1>
+  <form class="quiz"></form>
+
+  <script>
+    const forms = [
+      {
+        type: 'radio',
+        key: 'name',
+        title: 'What\'s my name?',
+        required: true,
+        options: [
+          { text: 'Dzaky Alamsyah Ahmad', value: 1 },
+          { text: 'Muhammad Dzaky Alamsyah', value: 2 },
+          { text: 'Ahmad Dzaky Alam', value: 3 }
+        ],
+        answer: 2
+      },
+      {
+        type: 'checkbox',
+        key: 'alias',
+        title: 'By what usually i called?',
+        required: true,
+        options: [
+          { text: 'Dzaky', value: 1 },
+          { text: 'Syah', value: 2 },
+          { text: 'Alam', value: 3 },
+          { text: 'Muhammad', value: 4 },
+          { text: 'Ahmad', value: 5 }
+        ],
+        answer: [1, 3]
+      },
+      {
+        type: 'text',
+        key: 'age',
+        title: 'How old i am?',
+        required: true,
+        answer: 25
+      },
+      {
+        type: 'radio',
+        key: 'nationality',
+        title: 'Where i am come from?',
+        required: true,
+        options: [
+          { text: 'India', value: 1 },
+          { text: 'Malaysia', value: 2 }, 
+          { text: 'Indonesia', value: 3 }
+        ],
+        answer: 3
+      },
+      {
+        type: 'text',
+        key: 'github',
+        title: 'What is my GitHub username? (format: github@<username>)',
+        required: true,
+          pattern: '^github@[a-zA-Z0-9]$',
+        answer: 'github@mdalamaladm'
+      },
+      {
+        type: 'checkbox',
+        key: 'favorite',
+        title: 'Which are my favorite food?',
+        required: true,
+        options: [
+          { text: 'Chicken', value: 1 },
+          { text: 'Shrimp', value: 2 },
+          { text: 'Grape', value: 3 },
+          { text: 'Potato', value: 4 },
+          { text: 'Ginger', value: 5 }
+        ],
+        answer: [1, 2, 4]
+      },
+      {
+        type: 'text',
+        key: 'blood',
+        title: 'What is my blood type?',
+        required: true,
+        answer: 'O'
+      }
+    ];
+    const date = new Date();
+    const currentYear = date.getFullYear();
+
+    function renderForm (forms) {
+      const formEl = document.querySelector('.quiz');
+
+      for (const question of forms) {
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('question', question.key);
+
+        const p = document.createElement('p');
+        p.innerText = question.title;
+
+        wrapper.append(p);      
+        
+        if (question.type === 'text') {
+          const label = document.createElement('label');
+
+          const input = document.createElement('input');
+          input.setAttribute('type', question.type);
+          input.setAttribute('name', question.key);
+
+          if (question.required) input.setAttribute('required', '');
+          if (question.pattern) input.setAttribute('pattern', question.pattern);
+
+          label.append(input);
+          wrapper.append(label);
+        } else if (question.type === 'radio' || question.type === 'checkbox') {
+          for (const option of question.options) {
+            const label = document.createElement('label');
+            const br = document.createElement('br');
+            const input = document.createElement('input');
+            input.setAttribute('type', question.type);
+            input.setAttribute('name', question.key);
+            input.setAttribute('value', option.value);
+
+            if (
+              question.required &&
+              question.type !== 'checkbox'
+            ) input.setAttribute('required', '');
+
+            const span = document.createElement('span');
+            span.innerText = option.text;
+
+            label.append(input);
+            label.append(span);
+            wrapper.append(label);
+            wrapper.append(br);
+          }
+        }
+
+        formEl.append(wrapper);
+      }    
+
+      const submitWrapper = document.createElement('div');
+      submitWrapper.classList.add('submit');
+
+      const submitButton = document.createElement('button');
+      submitButton.setAttribute('type', 'submit');
+      submitButton.innerText = 'See Result';
+
+      submitWrapper.append(submitButton);
+      formEl.append(submitWrapper);
+
+      formEl.addEventListener('submit', onSubmit)
+    }
+
+    function onSubmit (e) {    
+      const formData = new FormData(e.target);
+      let score = 0;  
+      
+      for (const question of forms) {
+        const name = question.key;
+        const type = question.type;
+        const answer = question.answer;
+
+        if (isCorrect({ formData, name, type, answer })) score++;
+      }
+
+      alert(`Your score is: ${score / 6 * 100}`);
+
+      e.preventDefault();
+    }
+
+    function isCorrect (params) {
+      if (params.type === 'text') return checkAnswer(params)
+      else if (params.type === 'checkbox') return checkAnswerMultiple(params)
+      else if (params.type === 'radio') return checkAnswer(params)
+    }
+
+    function checkAnswer ({ formData, name, answer }) {
+      const input = typeof answer === 'number' ? +formData.get(name) : formData.get(name);
+
+      return input === answer;
+    }
+
+    function checkAnswerMultiple ({ formData, name, answer }) {
+      let input = formData.getAll(name);
+      let theAnswer = [...answer];
+
+      if (typeof answer[0] === 'number') input = input.map(e => +e);
+      if (typeof input[0] === 'number') theAnswer = theAnswer.map(e => +e);
+
+      if (input.length > answer.length) return input.every(e => answer.includes(e));
+      else return theAnswer.every(e => input.includes(e));
+    }
+
+    renderForm(forms);
+    
+    const questionAgeText = document.querySelector('.question.age > p');
+    questionAgeText.innerHTML = `How old i am? (per year ${currentYear})`;
+  </script>
+</body>
+</html 

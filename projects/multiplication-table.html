@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiplication Table</title>
+  <style>
+    html {
+      margin-top: 4rem;
+      margin-bottom: 5.5rem;
+      background-color: #A6B28B;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 3rem;
+      color: #1C352D;
+    }
+
+    .table-wrapper {
+      display: flex;
+      justify-content: center;
+    }
+
+    .table-wrapper > table {
+      color: #1C352D;
+      font-size: 1.2rem;
+      border: solid 0.2rem white;
+      border-radius: 0.2rem;
+      border-collapse: collapse;
+    }
+
+    .table-wrapper > table td {
+      padding: 0.8rem;
+      border: solid 0.2rem white;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="title">Multiplication Table</h1>
+  <div class="table-wrapper"></div>
+  <script>
+    const tableWrapper = document.querySelector('.table-wrapper');
+    const table = document.createElement('table');
+    const tbody = document.createElement('tbody');
+    
+    for (let i = 1; i < 10; i++) {
+      const tr = document.createElement('tr');
+      
+      for (let j = 1; j < 10; j++) {
+        const td = document.createElement('td');
+        const span = document.createElement('span');
+
+        span.innerText = `${i} x ${j} = ${i * j}`;
+
+        td.append(span);
+        tr.append(td);
+      }
+
+      tbody.append(tr);
+    }
+
+    table.append(tbody);
+    tableWrapper.append(table);
+  </script>
+</body>
+</html>
