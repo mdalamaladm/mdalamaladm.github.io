@@ -4,11 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-     html {
+    html {
       margin-top: 4rem;
       margin-bottom: 5.5rem;
       background-color: #A6B28B;
       font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      margin: 1rem;
     }
 
     body > :not(.mode) {
@@ -26,14 +30,14 @@
     .mode {
       display: flex;
       justify-content: flex-end;
-      margin: 0 2rem 1rem 0;
+      margin: 0 0.5rem 1rem 0;
     }
 
     .mode > button {
-      padding: 0.8rem 2rem;
+      padding: 0.7rem 1.2rem;
       background-color: #1C352D;
       color: #A6B28B;
-      font-size: 1.2rem;
+      font-size: 0.8rem;
       font-weight: 600;
       border: none;
       border-radius: 0.5rem;
@@ -42,27 +46,34 @@
     
     .title-wrapper {
       display: flex;
+      align-items: center;
       justify-content: center;
+      height: 3rem;
     }
 
     .title {
       max-width: 30rem;
       text-align: center;
-      font-size: 4rem;
+      font-size: 1rem;
       color: #1C352D;
+    }
+
+    .title.fullname {
+      font-size: 0.8rem;
     }
 
     .image-container {
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 2rem;
+      margin-bottom: 0.5rem;
     }
  
     .image {
       place-content: center;
+      width: 100%;
       max-width: 30rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
     }
 
     .text {
@@ -70,12 +81,16 @@
       flex-direction: column;
       align-items: center;
       color: #1C352D;
-      font-size: 1.5rem;
+      font-size: 0.8rem;
     }
 
     .text > p {
       max-width: 30rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .text > p > a {
+      word-break: break-all;
     }
 
     .age {
@@ -88,15 +103,15 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 1rem;
-      margin-top: 3rem;
+      gap: 0.5rem;
+      margin-top: 1rem;
     }
 
     .card-wrapper > a {
       flex: 0 1 20rem;
       display: block;
-      width: 20rem;
-      padding: 1rem;
+      width: 8rem;
+      padding: 0.5rem;
       background-color: white;
       color: #1C352D;
       text-decoration: none;
@@ -105,19 +120,119 @@
     }
 
     .card-wrapper img {
-      width: 20rem;
+      width: 100%;
       border-radius: 0.3rem;
     }
 
     .project-title {
       text-align: center;
-      font-size: 1.5rem;
+      font-size: 1rem;
       font-weight: 600;
     }
 
     .project-description {
       margin: 0 1rem 1rem 1rem;
-      font-size: 1.2rem;
+      font-size: 0.8rem;
+    }
+
+    /* Phone Breakpoint */
+    @media screen and (min-width: 320px) {
+      .mode {
+        margin: 0 0.5rem 1.8rem 0;
+      }
+
+      .mode > button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+      }
+      
+      .title-wrapper {
+        margin-bottom: 1rem;
+      }
+
+      .title {
+        font-size: 2rem;
+      }
+
+      .title.fullname {
+        font-size: 1.5rem;
+      }
+
+      .text {
+        font-size: 1rem;
+      }
+
+      .card-wrapper {
+        gap: 1rem;
+      }
+
+      .card-wrapper > a {
+        padding: 0.8rem;
+      }
+
+      .project-title {
+        font-size: 1.2rem;
+      }
+
+      .project-description {
+        font-size: 1rem;
+      }
+    }
+
+    /* Tablet Breakpoint */
+    @media screen and (min-width: 481px) {
+      .card-wrapper {
+        gap: 1rem;
+        margin-top: 3rem;
+      }
+
+      .card-wrapper > a {
+        padding: 1rem;
+      }
+
+      .project-title{
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+
+      .project-description {
+        margin: 0 1rem 1rem 1rem;
+        font-size: 1.2rem;
+      }
+    }
+
+    /* Small Desktop Breakpoint */
+    @media screen and (min-width: 769px) {
+      .mode {
+        margin: 0 2rem 1rem 0;
+      }
+
+      .title-wrapper {
+        height: 4rem;
+        margin-bottom: 2rem;
+      }
+
+      .title {
+        font-size: 3rem;
+      }
+
+      .title.fullname {
+        font-size: 2rem;
+      }
+
+      .image-container {
+        margin-bottom: 2rem;
+      }
+
+      .text {
+        font-size: 1.2rem;
+      }
+    }
+
+    /* Large Desktop Breakpoint */
+    @media screen and (min-width: 1025px) {
+
     }
   </style>
   <title>@mdalamaladm</title>
@@ -133,9 +248,9 @@
     <img class="image" src="../assets/nature.jpg" alt="Nature">
   </div>
   <div class="text">
-    <p>My name is Muhammad Dzaky Alamsyah (I'm <span class="age" onclick="onShowAge()">25</span> btw). People call me Alam, or Dzaky (pronounced: Zakeey). I am a software engineer that currently strong in frontend, have a basic in backend, and a little bit in the DevOps. Still learning so i can handle all of it better</p>
-    <p>With that said, I will show you my projects that i've done it. I will update it accordingly</p>
-    <p>Fyi, this is my github: <a href="https://github.com/mdalamaladm" target="_blank">github@mdalamaladm</a>. Feel free to visit</p>
+    <p>My name is Muhammad Dzaky Alamsyah (I'm <span class="age" onclick="onShowAge()">25</span> btw). People call me Alam, or Dzaky (pronounced: Zakeey). I am a software engineer that currently strong in frontend, have a basic in backend, and a little bit in the DevOps. Still learning so i can handle all of it better.</p>
+    <p>Fyi, this is my GitHub: <a href="https://github.com/mdalamaladm" target="_blank">github@mdalamaladm</a>. Feel free to visit.</p>
+    <p>With that said, I will show you my projects that i've done it. I will update it accordingly.</p>
   </div>
   <div class="card-wrapper"></div>
 
@@ -173,11 +288,11 @@
     function changeText () {
       setTimeout(() => {
         if (title.innerText === '@mdalamaladm') {
+          title.classList.add('fullname');
           title.innerText = 'Muhammad Dzaky Alamsyah';
-          title.style.fontSize = '2.78rem';
         } else {
+          title.classList.remove('fullname');
           title.innerText = '@mdalamaladm';
-          title.style.fontSize = '4rem';
         }
 
         changeText();
@@ -187,6 +302,8 @@
     function onChangeMode () {
       if (mode === 'light') {
         document.documentElement.style.backgroundColor = '#16231f';
+        age.style.backgroundColor = '#A6B28B';
+        age.style.color = '#A6B28B';
         modeButton.style.color = '#1C352D';
         modeButton.style.backgroundColor = '#A6B28B';
         title.style.color = '#A6B28B';
@@ -195,6 +312,8 @@
         mode = 'dark';
       } else {
         document.documentElement.style.backgroundColor = '#A6B28B';
+        age.style.backgroundColor = '#16231f';
+        age.style.color = '#16231f';
         modeButton.style.color = '#A6B28B';
         modeButton.style.backgroundColor = '#1C352D';
         title.style.color = '#1C352D';
