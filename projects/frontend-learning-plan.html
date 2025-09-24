@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frontend Learning Plan</title>
+
+  <style>
+    :root {
+      --mda-primary: #A6B28B;
+      --mda-secondary: #1C352D;
+    }
+
+    html {
+      margin-top: 4rem;
+      margin-bottom: 5.5rem;
+      background-color: var(--mda-primary);
+      color: var(--mda-secondary);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 3rem;
+    }
+
+    .description {
+      text-align: center;
+      font-size: 1.5rem;
+    }
+
+    .plan-form-wrapper {
+      display: flex;
+      justify-content: center;
+    }
+
+    .plan-form {
+      width: 100%;
+      max-width: 20rem;
+      padding: 0.8rem 1.2rem 1.2rem 1.2rem;
+      border: solid 0.1rem white;
+      border-radius: 0.3rem;
+    }
+
+    .submit {
+      margin-top: 2rem;
+    }
+
+    .submit button {
+      padding: 0.5rem 1rem;
+      background-color: var(--mda-secondary);
+      color: var(--mda-primary);
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .submit button:hover,
+    .submit button:active {
+      background-color: #16231f;
+    }
+
+    .plan-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .card {
+      flex: none;
+      display: flex;
+      width: 100%;
+      max-width: 15rem;
+      padding: 1rem;
+      background-color: white;
+      border-radius: 0.5rem;
+      box-shadow: var(--mda-secondary) 1px 1px 20px;
+      cursor: pointer;
+    }
+
+    .card > .text-wrapper {
+      margin-left: 1rem;
+    }
+
+    .card .text-name {
+      color: var(--mda-secondary);
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="title">Frontend Learning Plan</h1>
+  <p class="description">This is todo list for frontend learning plan</p>
+
+  <div class="plan-form-wrapper">
+    <form class="plan-form">
+      <label>
+        <p>Plan</p>
+        <input type="text" name="plan">
+      </label>
+      <label>
+        <p>Task</p>
+        <input type="text" name="task">
+      </label>
+
+      <div class="submit">
+        <button type="submit">Add</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="plan-wrapper"></div>
+  
+  <script>
+    let plans = [
+      {
+        name: 'HTML dasar',
+        task: 'Buat struktur utama blog page',
+        done: true
+      },
+      {
+        name: 'CSS dasar',
+        task: 'Buat hiasan pada blog page',
+        done: false
+      },
+      {
+        name: 'JS dasar',
+        task: 'Buat alert "Selamat Datang!" ketika blog page dibuka pertama kali',
+        done: true
+      }
+    ];
+    const planForm = document.querySelector('.plan-form');
+    const planWrapper = document.querySelector('.plan-wrapper');
+
+    planForm.addEventListener('submit', onAddPlan);
+
+    function renderPlan () {
+      planWrapper.replaceChildren();
+
+      for (const i in plans) {
+        const plan = plans[i];
+        const planEl = document.createElement('label');
+        const textWrapper = document.createElement('div');
+        const name = document.createElement('p');
+        const task = document.createElement('p');
+        const status = document.createElement('input');
+
+        planEl.classList.add('card');
+
+        name.innerText = plan.name;
+        name.classList.add('text-name');
+
+        task.innerText = plan.task;
+        task.classList.add('text-task');
+
+        status.setAttribute('type', 'checkbox');
+        status.checked = plan.done;
+        status.addEventListener('change', (e) => {
+          plans[i].done = e.target.checked;
+        });
+
+        textWrapper.classList.add('text-wrapper');
+
+        textWrapper.append(name);
+        textWrapper.append(task);
+
+        planEl.append(status);
+        planEl.append(textWrapper);
+
+        planWrapper.append(planEl);
+      }
+    }
+
+    function onAddPlan (e) {
+      const formData = new FormData(e.target);
+
+      plans.push({
+        name: formData.get('plan'),
+        task: formData.get('task'),
+        done: false
+      });
+
+      renderPlan();
+
+      e.preventDefault(); 
+    }
+
+    renderPlan();
+  </script>
+</body>
+</html>
