@@ -9,6 +9,7 @@
     :root {
       --mda-primary: #A6B28B;
       --mda-secondary: #1C352D;
+      --mda-danger: #A80000;
     }
 
     html {
@@ -75,6 +76,7 @@
       width: 100%;
       max-width: 15rem;
       padding: 1rem;
+      position: relative;
       background-color: white;
       border-radius: 0.5rem;
       box-shadow: var(--mda-secondary) 1px 1px 20px;
@@ -89,6 +91,21 @@
       color: var(--mda-secondary);
       font-size: 1.2rem;
       font-weight: 600;
+    }
+
+    .card > .remove-button {
+      margin: 0.5rem 0.5rem 0 0;
+      padding: 0.2rem 0.5rem;
+      background-color: var(--mda-danger);
+      color: white;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 2;
+      outline: none;
+      border: none;
+      border-radius: 0.2rem;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -118,36 +135,48 @@
   <script>
     let plans = [
       {
+        id: 1,
         name: 'HTML dasar',
         task: 'Buat struktur utama blog page',
         done: true
       },
       {
+        id: 2,
         name: 'CSS dasar',
         task: 'Buat hiasan pada blog page',
         done: false
       },
       {
+        id: 3,
         name: 'JS dasar',
         task: 'Buat alert "Selamat Datang!" ketika blog page dibuka pertama kali',
         done: true
       }
     ];
-    const planForm = document.querySelector('.plan-form');
-    const planWrapper = document.querySelector('.plan-wrapper');
 
-    planForm.addEventListener('submit', onAddPlan);
+    function clearForm (e) {
+      const form = document.querySelector('.plan-form');
 
-    function renderPlan () {
+      form.querySelectorAll('input').forEach((input) => {
+        input.value = '';
+      })
+    }
+
+    function renderPlan (e) {
       planWrapper.replaceChildren();
+      planWrapper.removeEventListener('click', onRemovePlan)
 
       for (const i in plans) {
         const plan = plans[i];
+
+        // #1 Manipulating DOM (preferred)
+
         const planEl = document.createElement('label');
         const textWrapper = document.createElement('div');
         const name = document.createElement('p');
         const task = document.createElement('p');
         const status = document.createElement('input');
+        const removeButton = document.createElement('button');
 
         planEl.classList.add('card');
 
@@ -159,9 +188,11 @@
 
         status.setAttribute('type', 'checkbox');
         status.checked = plan.done;
-        status.addEventListener('change', (e) => {
-          plans[i].done = e.target.checked;
-        });
+        status.addEventListener('change', (e) => onSetDonePlan(e.target.checked, i));
+
+        removeButton.id = plan.id;
+        removeButton.classList.add('remove-button');
+        removeButton.innerText = 'Remove';
 
         textWrapper.classList.add('text-wrapper');
 
@@ -170,24 +201,66 @@
 
         planEl.append(status);
         planEl.append(textWrapper);
+        planEl.append(removeButton);
 
         planWrapper.append(planEl);
+        planWrapper.addEventListener('click', onRemovePlan);
+
+        // =========================
+
+        // #2 Using string literal (Must sanitized!)
+
+        // planWrapper.innerHTML += `
+        //   <label class="card">
+        //     <input
+        //       onchange="onSetDonePlan(this.checked, ${i})"
+        //       type="checkbox"
+        //       ${plan.done ? 'checked' : ''}
+        //     />
+        //     <div class="text-wrapper">
+        //       <p class="text-name">${plan.name}</p>
+        //       <p class="text-task">${plan.task}</p>
+        //     </div>
+        //   </label>
+        // `
       }
     }
 
     function onAddPlan (e) {
       const formData = new FormData(e.target);
 
+      const id = Math.random();
+
       plans.push({
+        id,
         name: formData.get('plan'),
         task: formData.get('task'),
         done: false
       });
 
+      clearForm();
+
       renderPlan();
 
       e.preventDefault(); 
     }
+
+    function onRemovePlan (e) {
+      if (e.target.tagName === 'BUTTON') {
+        plans = plans.filter(p => p.id !== +e.target.id);
+
+        renderPlan();
+      }
+    }
+
+    function onSetDonePlan (checked, i) {
+      plans[i].done = checked;
+    }
+
+    const planForm = document.querySelector('.plan-form');
+    const planWrapper = document.querySelector('.plan-wrapper');
+
+    planForm.addEventListener('submit', onAddPlan);
 
     renderPlan();
   </script>
