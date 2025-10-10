@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON Placeholder's Users</title>
+  <style>
+    html {
+      margin-top: 4rem;
+      margin-bottom: 5.5rem;
+      background-color: #A6B28B;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .title {
+      margin-bottom: 5rem;
+      text-align: center;
+      font-size: 3rem;
+      color: #1C352D;
+    }
+
+    .card-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.1);
+        opacity: 0.6;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .indicator {
+      margin-top: 5rem;
+      font-size: 2rem;
+    }
+
+    .indicator.loading {
+      color: #1C352D;
+      animation: pulse 1.5s infinite;
+    }
+
+    .indicator.error {
+      color: red;
+    }
+
+    .indicator.success {
+      display: none;
+    }
+
+    .card {
+      flex: none;
+      width: 300px; 
+      padding: 1rem;
+      background-color: white;
+      border-radius: 0.5rem;
+      box-shadow: #1C352D 1px 1px 20px;
+    }
+
+    .line {
+      height: 1px;
+      margin: 0.5rem 0;
+      background-color: black;
+    }
+
+    .company, .name, .phone, .email {
+      color: #1C352D;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .company {
+      font-size: 1.2rem;
+    }
+
+    .name {
+      font-size: 1.5rem;
+    }
+
+    .phone, .email {
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="title">Users from JSON Placeholder API</h1>
+  <div class="card-container">
+    <p class="indicator loading">Fetching...</p>
+  </div>
+  <script>
+    const cardContainer = document.querySelector('.card-container');
+    const indicator = document.querySelector('.indicator');
+
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(data => {
+        indicator.classList.remove('loading');
+        indicator.classList.add('success');
+
+        for (const user of data) {
+          const card = document.createElement('div');
+          const line = document.createElement('div');
+          const company = document.createElement('p');
+          const name = document.createElement('p');
+          const phone = document.createElement('p');
+          const email = document.createElement('p');
+
+          card.classList.add('card');
+          line.classList.add('line');
+          company.classList.add('company');
+          name.classList.add('name');
+          phone.classList.add('phone');
+          email.classList.add('email');
+
+          company.innerText = user.company.name;
+          name.innerText = user.name;
+          phone.innerText = user.phone;
+          email.innerText = user.email;
+
+          card.append(company);
+          card.append(line);
+          card.append(name);
+          card.append(phone);
+          card.append(email);
+
+          cardContainer.append(card);
+        }
+      })
+      .catch(() => {
+        indicator.classList.remove('loading');
+        indicator.classList.add('error');
+        indicator.innerText = 'Error, please try again.';
+      })
+  </script>
+</body>
+</html>
