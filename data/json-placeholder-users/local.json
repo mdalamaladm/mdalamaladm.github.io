@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Alamsyah",
+    "email": "alamsyah@alamsyah.alamsyah",
+    "phone": "0800000000",
+    "company": {
+      "name": "PT Sumber Jaya"
+    }
+  },
+  {
+    "name": "Dzaky",
+    "email": "dzaky@dzaky.dzaky",
+    "phone": "088888888",
+    "company": {
+      "name": "PT Sumber Jaya"
+    }
+  },
+  {
+    "name": "Muhammad",
+    "email": "muh@muh.muh",
+    "phone": "08080808080",
+    "company": {
+      "name": "PT Alam Jaya"
+    }
+  }
+]

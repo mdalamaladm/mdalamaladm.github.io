@@ -8,6 +8,7 @@
     html {
       margin-top: 4rem;
       margin-bottom: 5.5rem;
+      padding: 0 1rem;
       background-color: #A6B28B;
       font-family: Arial, Helvetica, sans-serif;
     }
@@ -19,7 +20,13 @@
       color: #1C352D;
     }
 
-    .card-container {
+    .subtitle {
+      margin-top: 4rem;
+      font-size: 2rem;
+      color: #1C352D;
+    }
+
+    .remote-container, .local-container {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
@@ -43,21 +50,21 @@
       }
     }
 
-    .indicator {
+    .remote-indicator, .local-indicator {
       margin-top: 5rem;
       font-size: 2rem;
     }
 
-    .indicator.loading {
+    .remote-indicator.loading, .local-indicator.loading {
       color: #1C352D;
       animation: pulse 1.5s infinite;
     }
 
-    .indicator.error {
+    .remote-indicator.error, .local-indicator.error {
       color: red;
     }
 
-    .indicator.success {
+    .remote-indicator.success, .local-indicator.success {
       display: none;
     }
 
@@ -93,22 +100,27 @@
     .phone, .email {
       font-size: 1rem;
     }
+
+    @media screen and (min-width: 580px) {
+      html {
+        padding: 0 5rem;
+      }
+    }
   </style>
 </head>
 <body>
   <h1 class="title">Users from JSON Placeholder API</h1>
-  <div class="card-container">
-    <p class="indicator loading">Fetching...</p>
+  <h2 class="subtitle">Local Users</h2>
+  <div class="local-container">
+    <p class="local-indicator loading">Fetching...</p>
+  </div>
+  <h2 class="subtitle">Remote Users</h2>
+  <div class="remote-container">
+    <p class="remote-indicator loading">Fetching...</p>
   </div>
   <script>
-    const cardContainer = document.querySelector('.card-container');
-    const indicator = document.querySelector('.indicator');
-
-    async function loadUsers () {
+    function renderUsers (data, indicator, cardContainer) {
       try {
-        const res = await fetch('https://jsonplaceholder.typicode.com/users');
-        const data = await res.json();
-
         indicator.classList.remove('loading');
         indicator.classList.add('success');
 
@@ -149,7 +161,28 @@
       }
     }
 
-    loadUsers();
+    async function loadRemoteUsers () {
+      const cardContainer = document.querySelector('.remote-container');
+      const indicator = document.querySelector('.remote-indicator');
+
+      const res = await fetch('https://jsonplaceholder.typicode.com/users');
+      const data = await res.json();
+
+      renderUsers(data, indicator, cardContainer);
+    }
+
+    async function loadLocalUsers () {
+      const cardContainer = document.querySelector('.local-container');
+      const indicator = document.querySelector('.local-indicator');
+      
+      const res = await fetch('../data/json-placeholder-users/local.json');
+      const data = await res.json();
+
+      renderUsers(data, indicator, cardContainer);
+    }
+
+    loadLocalUsers();
+    loadRemoteUsers();
   </script>
 </body>
 </html>
