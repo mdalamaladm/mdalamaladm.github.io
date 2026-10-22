@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mdalamaladm</title>
+
+  <style>
+    :root {
+      color-scheme: dark;
+
+      /* Backgrounds */
+      --color-orbital-black: #050B14;
+      --color-mission-control: #0B1625;
+      --color-deep-space: #111F32;
+      --color-orbital-steel: #12243A;
+      --color-card-hover: #1A304A;
+      --color-active-surface: #203D5B;
+
+      /* Text */
+      --color-starlight: #F1F5F9;
+      --color-moonlight: #B8C7D9;
+      --color-stardust: #8498B0;
+      --color-disabled-text: #52657B;
+
+      /* Borders and dividers */
+      --color-orbital-border: #263A52;
+      --color-border-hover: #3B5877;
+      --color-space-divider: #1B2C40;
+
+      /* Cyan accents */
+      --color-telemetry-cyan: #22D3EE;
+      --color-cyan-glow: #67E8F9;
+      --color-cyan-pressed: #06B6D4;
+      --color-cyan-dark: #123747;
+      --color-focus-ring: #67E8F9;
+
+      /* Status colors */
+      --color-success: #34D399;
+      --color-warning: #FBBF24;
+      --color-error: #F87171;
+      --color-information: #60A5FA;
+
+      /* Component styling */
+      --radius-card: 12px;
+      --radius-control: 8px;
+      --shadow-card: 0 8px 24px rgb(0 0 0 / 20%);
+
+      /* Animation */
+      --transition-ui: 160ms ease;
+    }
+
+    html {
+      height: 100%;
+      min-height: 100%;
+    }
+
+    body {
+      height: 100%;
+      font-family: monospace;
+      margin: 0 0 2rem;
+      background-color: #050B14;
+      color: #F1F5F9;
+    }
+
+    /* Normal unvisited link */
+    a:link {
+      color: #22D3EE;
+      text-decoration: none;
+    }
+
+    /* Visited link */
+    a:visited {
+      color: #F1F5F9;
+    }
+
+    /* Hover and focus states */
+    a:hover, a:focus {
+      color: #F1F5F9;
+      text-decoration: underline;
+    }
+
+    /* Active click state */
+    a:active {
+      color: #F1F5F9;
+    }
+
+
+    .text-center {
+      text-align: center;
+    }
+
+    .timeline-wrapper {
+      padding: 2rem 4rem;
+      height: 2700px;
+      position: relative
+    }
+
+    #timeline {
+      position: relative;
+    }
+
+    .point {
+      position: absolute;
+      border-radius: 50%;
+      z-index: 2;
+    }
+
+    .title {
+      width: 200px;
+      position: absolute;
+      font-weight: bold;
+      pointer-events: none;
+    }
+
+    .line {
+      height: 3px;
+      position: absolute;
+      background-color: #F1F5F9;
+      transform-origin: left;
+      opacity: 0.3;
+      z-index: 1
+    }
+    
+    .box {
+      flex: none;
+      display: none;
+      background-color: blue;
+      padding: 1rem;
+      position: fixed;
+      height: 50vh;
+      max-width: 300px;
+      width: 100vh;
+      overflow: auto;
+      z-index: 3;
+    }
+
+    .box-header {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .year {
+      display: grid;
+      place-items: center;
+      width: 100%;
+      margin: 0 -4rem;
+      position: absolute;
+      font-size: 8.5rem;
+      font-weight: bold;
+      z-index: 0;
+      opacity: 0.05;
+    }
+
+    .y-2019 {
+      top: 0;
+      height: 450px;
+      background-color: purple;
+    }
+
+    .y-2020 {
+      top: 450px;
+      height: 150px;
+      background-color: red;
+    }
+
+    .y-2021 {
+      top: 600px;
+      height: 150px;
+      background-color: blue;
+    }
+
+    .y-2022 {
+      top: 750px;
+      height: 200px;
+      background-color: black;
+    }
+
+    .y-2023 {
+      top: 950px;
+      height: 200px;
+      background-color: orange;
+    }
+
+    .y-2024 {
+      top: 1150px;
+      height: 350px;
+      background-color: yellow;
+    }
+
+    .y-2025 {
+      top: 1500px;
+      height: 250px;
+      background-color: green;
+    }
+
+    .y-2026 {
+      top: 1750px;
+      height: 1050px;
+      background-color: skyblue;
+      opacity: 0.1;
+    }
+  </style>
+</head>
+<body>
+  <section style="margin: 2rem;">
+    <h1 class="text-center">mdalamaladm</h1>
+    <h2 class="text-center">Muhammad Dzaky Alamsyah</h2>
+    <p class="text-center"><b>Github:</b> <a href="https://github.com/mdalamdaladm">mdalamdaladm</a> . <b>Linkedin:</b> <a href="https://linkedin.com/in/muhammad-dzaky-alam-465155211">Muhammad Dzaky Alamsyah</a> . <b>Email:</b> mdalamaladm@gmail.com</p>
+
+    <p class="text-center">Product-focused software engineer with 3+ years of professional experience building and maintaining web appli­cations across frontend, backend, and infrastructure. Takes a problem-first approach: understanding a workflow, designing a practical interface, implementing the solution, and iterating on the result. Professional experience is strongest in Vue.js and Nuxt.js, with hands-on work in React/Next.js, Node.js, databases, and deployment. Independent projects include self-designed and documented interfaces, a deployed web application, workflow automation with measurable time savings, and private product prototypes.</p>
+
+    <h3 class="text-center">Languages</h3>
+
+    <p class="text-center">Indonesian . English . Arabic</p>
+
+    <h3 class="text-center">Skills</h3>
+
+    <p id="skills" class="text-center">HTML . CSS . VueJS . NuxtJS . React . NextJS . Svelte . SvelteKit . NodeJS . ExpressJS . NestJS . Golang . Fast API . REST APIs . JavaScript . TypeScript . Golang . Python . C++ . Dart . Bash . PostgreSQL . SQLite . UI Design . UI Documentation . Workflow-Oriented Interface Design . Problem-First Product Development . Markdown Parsing . Text-Diff Algorithm . Authentication & Authorization . Docker . Google Cloud . Linux . VPS . Supabase . FFMPEG</p>
+  </section>
+
+  <section class="timeline-wrapper">
+    <div id="timeline"></div>
+    <div class="year y-2019">2019</div>
+    <div class="year y-2020">2020</div>
+    <div class="year y-2021">2021</div>
+    <div class="year y-2022">2022</div>
+    <div class="year y-2023">2023</div>
+    <div class="year y-2024">2024</div>
+    <div class="year y-2025">2025</div>
+    <div class="year y-2026">2026</div>
+  </section>
+
+  <div id="boxes">
+  </div>
+  <script>
+    const points = [
+      {
+        name: 'HTML . CSS. JS',
+        x: 0,
+        y: 100,
+        size: 20,
+        color: 'red',
+      },
+      {
+        name: 'Infak Wakaf App (Donation App)',
+        x: 100,
+        y: 300,
+        size: 30,
+        color: 'red',
+      },
+      {
+        x: 50,
+        y: 450,
+        size: 15,
+      },
+      {
+        name: 'Kautsar',
+        x: 70,
+        y: 470,
+        size: 70,
+        color: 'red',
+        card: {
+          date: 'Jul 2020 - Feb 2023',
+          content: [
+            'School and learning-management systems · Vue.js, Nuxt.js',
+            [
+              'Built and maintained application features for school and learning-management products using Vue.js and Nuxt.js.',
+              'Designed a private reusable component library, including shared inputs and tables used across frontend applications.',
+              'Collaborated with a multi-developer team through a Git-based workflow.',
+            ]
+          ]
+        }
+      },
+      {
+        name: 'Games Awesome',
+        x: 100,
+        y: 550,
+        size: 20,
+        color: 'red',
+      },
+      {
+        x: 10,
+        y: 600,
+        size: 15,
+      },
+      {
+        x: 60,
+        y: 650,
+        size: 15,
+      },
+      
+      {
+        x: 40,
+        y: 750,
+        size: 15,
+      },
+      {
+        name: 'Simple Weather App',
+        x: 60,
+        y: 770,
+        size: 20,
+        color: 'red',
+      },
+      {
+        name: 'Enlightyx',
+        x: 100,
+        y: 800,
+        size: 70,
+        color: 'red',
+        card: {
+          date: 'Oct 2022 - Feb 2023',
+          content: [
+            'IoT device-management platform · Vue.js, Nuxt.js, Node.js, MQTT, Docker, Google Cloud',
+            [
+              'Owned an IoT web-management system across the Vue.js/Nuxt.js frontend and Node.js backend, including MQTT-based device communication.',
+              'Investigated recurring CPU spikes and traced them to asynchronous calls firing burst events inside a loop; changed the execution to run sequentially and stabilized CPU usage.',
+              "Migrated the platform's time-series storage from a VPS-hosted InfluxDB instance to Google BigQuery, resolving recurring VPS memory-exhaustion incidents.",
+            ]
+          ]
+        }
+      },
+      {
+        x: 20,
+        y: 900,
+        size: 15,
+      },
+      {
+        x: 60,
+        y: 950,
+        size: 15,
+      },
+      {
+        name: 'Suteki',
+        x: 0,
+        y: 1000,
+        size: 40,
+        color: 'red',
+        card: {
+          date: 'Jun 2023 - Nov 2023',
+          content: [
+            'Campus and learning-management system · Vue.js, Nuxt.js',
+            [
+              'Implemented and maintained user-facing features for a campus and learning-management system using Vue.js and Nuxt.js.',
+            ]
+          ]
+        }
+      },
+      {
+        name: 'User Management',
+        x: 50,
+        y: 1050,
+        size: 30,
+        color: 'red',
+      },
+      {
+        name: 'Rekabio',
+        x: 90,
+        y: 1100,
+        size: 40,
+        color: 'red',
+        card: {
+          date: 'Oct 2023 - Nov 2023',
+          content: [
+            'Carbon-credit marketplace web application · React',
+            [
+              'Built the initial frontend implementation of a carbon-credit marketplace before handing the project over for continued development.',
+            ]
+          ]
+        }
+      },
+      {
+        x: 30,
+        y: 1150,
+        size: 15,
+      },
+      {
+        x: 50,
+        y: 1250,
+        size: 15,
+      },
+      {
+        name: 'Qoyyid',
+        x: 0,
+        y: 1300,
+        size: 40,
+        color: 'red',
+        card: {
+          date: 'Jan 2024 - Present',
+          content: [
+            'Footnote-focused writing application · React, Next.js, TypeScript',
+            [
+              'Initially developed for approximately 1.5 months in 2024 to solve a personal problem with managing footnotes, then resumed development in June 2026.',
+              "Designed and documented the application's UI around a footnote-focused writing workflow, with the goal of providing a better footnote experience than general-purpose document editors.",
+              'Built a custom Markdown parser from scratch, currently supporting paragraphs, bold, italic, and unordered lists, as a learning opportunity and to control the document representation.',
+              'Built a custom text-diff algorithm from scratch and am integrating it with the document model to preserve footnote integrity when the underlying content changes.',
+              'Currently approximately 80% complete, with the main remaining challenge being reliable integration of Markdown parsing, text diffing, and footnote relationships.',
+            ]
+          ]
+        }
+      },
+      {
+        name: 'DurusAUD CLI',
+        x: 100,
+        y: 1400,
+        size: 70,
+        color: 'red',
+        card: {
+          date: 'Sep 2024 - Present',
+          content: [
+            'Audio-editing workflow · Bash, FFmpeg, Termux, Flutter',
+            [
+              'Built the CLI version in late 2024 over approximately one month to solve a repetitive personal audio-editing workflow involving many recordings.',
+              'Automated batch operations including cutting, compression, filename handling, and metadata-related tasks using Bash and FFmpeg in Termux.',
+              'Reduced my own batch audio-editing workflow from nearly a full day to a few minutes.',
+              'Gradually designed and developed a Flutter Android application to bring the workflow from the CLI to a mobile interface; the mobile app is still in development.',
+              "Designed and documented the mobile application's UI as part of the transition from the original CLI workflow to a dedicated Android application.",
+            ]
+          ]
+        }
+      },
+      {
+        x: 10,
+        y: 1500,
+        size: 15,
+      },
+      {
+        x: 60,
+        y: 1550,
+        size: 15,
+      },
+      {
+        name: 'Al-Maree Al-Adeniy',
+        x: 30,
+        y: 1600,
+        size: 50,
+        color: 'red',
+      },
+      {
+        x: 100,
+        y: 1750,
+        size: 15,
+      },
+      {
+        name: 'Tarjamah',
+        x: 40,
+        y: 1800,
+        size: 80,
+        color: 'red',
+        card: {
+          date: 'Jan 2026 - Present',
+          content: [
+            'Deployed web application · Vue.js, NestJS, PostgreSQL, Supabase, VPS',
+            [
+              'Built and maintain a deployed web application for discovering translated Islamic books, working across the frontend, backend, file storage, and deployment.'
+            ]
+          ]
+        }
+      },
+      {
+        x: 10,
+        y: 1900,
+        size: 15,
+      },
+      {
+        x: 60,
+        y: 1950,
+        size: 15
+      },
+      {
+        name: 'Architecture Lab . Car Wash',
+        x: 0,
+        y: 2000,
+        size: 50,
+        color: 'red',
+        card: {
+          date: 'Jul 2026 - Present',
+          content: [
+            'Go · REST API · Service-layer architecture · In progress',
+            [
+              'Developing a Go REST API with service-layer separation for core car-wash management workflows.'
+            ]
+          ]
+        }
+      },
+      {
+        name: 'Dauroh Mukatsafah',
+        x: 100,
+        y: 2050,
+        size: 50,
+        color: 'red',
+        card: {
+          date: 'Jul 2026 - Present',
+          content: [
+            'C++ · Qt Widgets · SQLite · In progress',
+            [
+              'Designed and documented the UI after observing one memorization program manage its workflow in a repetitive, poorly organized Excel process; the application is being built around that observed workflow.',
+              'Implemented initial screens and part of the local data layer; the application remains in progress.',
+            ]
+          ]
+        }
+      },
+      {
+        name: 'DurusAUD Mobile',
+        x: 30,
+        y: 2100,
+        size: 50,
+        color: 'red',
+      },
+      {
+        name: 'Qalam Studio — Private Business POC',
+        x: 100,
+        y: 2150,
+        size: 50,
+        color: 'red',
+        card: {
+          date: 'Aug 2026 - Present',
+          content: [
+            'Generative-content workflow · FastAPI · Proof of concept',
+            [
+              'Built a minimal single-page proof of concept for a Muslim-friendly generative-content workflow, implementing an initial end-to-end generation-engine workflow.',
+              'Refining prompt strategy, output quality, and efficiency; the POC is not production-ready, and its current UI is limited to the basic workflow. Proprietary implementation details are kept private.',
+            ]
+          ]
+        }
+      },
+      {
+        name: 'Qoyyid',
+        x: 20,
+        y: 2250,
+        size: 50,
+        color: 'red',
+      },
+    ];
+
+    let isHovered = false;
+    const boxes = document.getElementsByClassName('box');
+
+    window.addEventListener('scroll', () => {
+      if (isHovered) {
+        Array.from(boxes).forEach(b => {
+          b.style.display = 'none';
+        });
+      }
+    });
+
+    const timeline = document.getElementById('timeline');
+
+    const timelineObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach(entry => {
+          const box = document.getElementById('box-' + entry.target.id);
+
+          if (entry.target.classList.contains('point') && box) {
+
+            if (entry.isIntersecting) {
+              box.style.display = 'block';
+            } else {
+              box.style.display = 'none';
+            }
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '-35% 0px -20% 0px',
+        threshold: 0
+      }
+    );
+
+    function positionBox (point, box) {
+      const pointRect = point.getBoundingClientRect();
+      const boxRect = box.getBoundingClientRect();
+
+      const viewportWidth = window.innerWidth;
+
+      console.log('===');
+      // console.log('VIEWPORT', viewportWidth);
+      // console.log('POINT LEFT', pointRect.left);
+      // // console.log('POINT WIDTH', pointRect.width);
+      // // console.log('BOX WIDTH', boxRect.width);
+      box.style.top = pointRect.top + 'px';
+
+      if (pointRect.left > viewportWidth / 2) {
+        console.log('KANAN');
+        box.style.left = pointRect.left - boxRect.width + 'px'; 
+      } else {
+        box.style.left = pointRect.left + pointRect.width + 'px';
+      }
+    }
+
+    function showTimeline () {
+      timeline.innerHTML = '';
+      boxes.innerHTML = '';
+      const width = timeline.getBoundingClientRect().width - 100;
+      
+      console.log(width);
+
+      for (let i = 0; i < points.length; i++) {
+        const p2 = points[i]
+        const point = document.createElement('div');
+        point.id = 'point-' + i;
+        point.classList.add('point');
+        point.style.width = p2.size + 'px';
+        point.style.height = p2.size + 'px';
+        point.style.top = p2.y + 'px';
+        point.style.left = width * (p2.x / 100) + 'px';
+        point.style.backgroundColor = p2.color || 'black';
+
+        if (p2.name) {
+          const title = document.createElement('p');
+          title.innerText = p2.name;
+          title.classList.add('title', 'text-center');
+          title.style.left = (-200 / 2) + p2.size / 2 + 'px';
+          title.style.top = p2.size - 10 + 'px';
+
+          const box = document.createElement('div');
+          box.id = 'box-' + point.id;
+          box.classList.add('box');
+
+          const header = document.createElement('div');
+          header.classList.add('box-header');
+          
+          const boxTitle = document.createElement('p');
+          boxTitle.innerText = p2.name;
+          const boxDate = document.createElement('p');
+          boxDate.innerText = p2.card?.date;
+
+          header.append(boxTitle);
+          header.append(boxDate);
+
+          box.append(header);
+
+          const content = document.createElement('div');
+          
+          for (const text of p2.card?.content || []) {
+            if (Array.isArray(text)) {
+              const ul = document.createElement('ul');
+
+              for (const t of text) {
+                const li = document.createElement('li');
+
+                li.innerText = t;
+
+                ul.append(li);
+              }
+
+              content.append(ul);
+            } else {
+              const p = document.createElement('p');
+
+              p.innerText = text;
+
+              content.append(p);
+            }
+          }
+
+          box.append(content);
+
+          point.addEventListener('mouseenter', () => {
+            isHovered = true;
+            box.style.display = 'block';
+            positionBox(point, box);
+          })
+          point.addEventListener('mouseleave', () => {
+            isHovered = false;
+            box.style.display = 'none';
+            positionBox(point, box);
+          })
+
+          point.append(title);
+          document.body.append(box);
+        }
+
+        const line = document.createElement('div');
+        line.classList.add('line');
+        const p1 = points[i - 1];
+        
+        if (p1) {
+          const centerX1 = width * (p1.x / 100) + (p1.size / 2); 
+          const centerY1 = p1.y + (p1.size / 2); 
+
+          const centerX2 = width * (p2.x / 100) + (p2.size / 2); 
+          const centerY2 = p2.y + (p2.size / 2);
+
+          const lengthX = centerX2 - centerX1;
+          const lengthY = centerY2 - centerY1;
+          const length = Math.sqrt((lengthX ** 2) + (lengthY ** 2));
+          const angle = Math.atan2(lengthY, lengthX) * (180 / Math.PI);
+
+          line.style.top = centerY1 + 'px';
+          line.style.left = centerX1 + 'px';
+          line.style.width = length + 'px';
+          line.style.transform = `rotate(${angle}deg)`;
+
+          timeline.append(line);
+        }
+          
+        timeline.append(point);
+
+        // timelineObserver.observe(point);
+      }
+    }
+
+    showTimeline();
+
+    const resizeObserver = new ResizeObserver(showTimeline);
+
+    resizeObserver.observe(timeline);
+  </script>
+</body>
+
+</html>
